@@ -1,0 +1,22 @@
+{
+  "name": "nodejsblogclient",
+  "version": "1.0.0",
+  "description": "Client for blog nodejs application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickBrisebois/NodeJSBlog.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "Nick Brisebois",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickBrisebois/NodeJSBlog/issues"
+  },
+  "homepage": "https://github.com/NickBrisebois/NodeJSBlog#readme"
+}
