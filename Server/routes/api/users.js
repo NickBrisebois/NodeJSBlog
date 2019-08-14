@@ -58,7 +58,9 @@ router.post('/login', auth.optional, (req, res, next) => {
         if(passportUser) {
             const user = passportUser;
             user.token = passportUser.generateJWT();
-            return res.json({user: user.toAuthJSON});
+            res.cookie('userData', "PLEASE WORK", {httpOnly: false});
+            res.sendStatus(200);
+            //return res.json({user: user.toAuthJSON()});
         }
         return res.status(400);
     })(req, res, next);

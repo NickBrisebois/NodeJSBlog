@@ -4,6 +4,7 @@ function headers() {
     const headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        credentials: 'include'
     }
     return headers;
 }
@@ -23,12 +24,13 @@ function login(username, password) {
     };
 
     return new Promise((resolve) => {
-        fetch(`${apiUrl}/users/login`, options).then(response => {
-            if(response.ok) {
+        fetch(`${apiUrl}/users/login`, options).then(res => {
+            if(res.ok) {
                 console.log("Successful. Getting response data:");
-                /*response.json().then(data => {
+                res.json().then(function(data) {
                     console.log(data);
-                })*/
+                    window.location.href = "/secret";
+                })
             }else {
                 console.log("Failed");
             }
