@@ -1,0 +1,18 @@
+<h1>Login</h1>
+
+<form id="login_form" action="" method="POST">
+    <input type="text" name="username" id="username_box" />
+    <input type="password" name="password" id="password_box" />
+    <input type="submit">
+</form>
+
+<script src="/javascripts/actions/REST.js"></script>
+<script type="text/javascript">
+    document.getElementById('login_form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        let username = document.getElementById("username_box").value;
+        let password = document.getElementById("password_box").value;
+        login(username, password);
+        return false;
+    });
+</script>

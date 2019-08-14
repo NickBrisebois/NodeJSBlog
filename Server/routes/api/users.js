@@ -4,7 +4,8 @@ const router = require('express').Router();
 const auth = require('../auth');
 const Users = mongoose.model('Users');
 
-router.post('/', auth.optional, (req, res, next) => {
+router.post('/register', auth.optional, (req, res, next) => {
+    //const user = req.body;
     const {body: {user}} = req;
 
     if(!user.username) {
@@ -24,6 +25,8 @@ router.post('/', auth.optional, (req, res, next) => {
     }
 
     const finalUser = new Users(user);
+
+    finalUser.setPassword(user.password);
 
     return finalUser.save()
     .then( () => res.json({user: finalUser.toAuthJSON()}));
@@ -57,8 +60,7 @@ router.post('/login', auth.optional, (req, res, next) => {
             user.token = passportUser.generateJWT();
             return res.json({user: user.toAuthJSON});
         }
-
-        return status(400).info;
+        return res.status(400);
     })(req, res, next);
 });
 
