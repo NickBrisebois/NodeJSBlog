@@ -27,11 +27,8 @@ function login(username, password) {
     return new Promise((resolve) => {
         fetch(`${apiUrl}/users/login`, options).then(res => {
             if(res.ok) {
-                console.log("Successful. Getting response data:");
-                /*res.json().then(function(data) {
-                    console.log(data);
-                    window.location.href = "/secret";
-                })*/
+                console.log("Successful login");
+                window.location.href = "/secret";
             }else {
                 console.log("Failed");
             }
@@ -43,8 +40,9 @@ function isLoggedIn() {
     const options = {
         method: 'GET',
         headers: headers(),
-        credentials: 'same-origin',
-    }
+        mode: 'cors',
+        credentials: 'include',
+    };
 
     return new Promise((resolve) => {
         fetch(`${apiUrl}/users/isLoggedIn`, options).then(res => {

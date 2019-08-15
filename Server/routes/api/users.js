@@ -61,10 +61,9 @@ router.post('/login', auth.optional, (req, res, next) => {
             res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             res.set('Access-Control-Allow-Headers', 'content-type, allow');
             res.set('Access-Control-Allow-Credentials', 'true');
-            res.cookie('auth-token', user, {httpOnly: false, maxAge: 90000});
-            res.cookie('tesasdfasdf', 'tesadsfasdf', {httpOnly: false, maxAge: 90000});
+            res.cookie('auth-token', user.token, {httpOnly: true, maxAge: 90000});
+            res.sendStatus(200);
             next();
-            //return res.json({user: user.toAuthJSON()});
         }
         return res.status(400);
     })(req, res, next);
@@ -83,8 +82,7 @@ router.get('/current', auth.required, (req, res, next) => {
       })
 })
 
-router.get('/isLoggedIn', auth.optional, (req, res, next) => {
-    console.log(req.cookies);
+router.get('/isLoggedIn', auth.required, (req, res, next) => {
     return res.sendStatus(200);
 })
 
