@@ -58,9 +58,8 @@ router.post('/login', auth.optional, (req, res, next) => {
         if(passportUser) {
             const user = passportUser;
             user.token = passportUser.generateJWT();
-            res.cookie('userData', "PLEASE WORK", {httpOnly: false});
-            res.sendStatus(200);
-            //return res.json({user: user.toAuthJSON()});
+            res.cookie('auth-token', user, {httpOnly: false, maxAge: 90000});
+            return res.json({user: user.toAuthJSON()});
         }
         return res.status(400);
     })(req, res, next);
@@ -77,6 +76,11 @@ router.get('/current', auth.required, (req, res, next) => {
 
           return res.json({user: user.toAuthJSON()});
       })
+})
+
+router.get('/isLoggedIn', auth.optional, (req, res, next) => {
+    console.log(req.cookies);
+    return res.sendStatus(200);
 })
 
 module.exports = router;

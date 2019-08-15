@@ -4,7 +4,6 @@ function headers() {
     const headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        credentials: 'include'
     }
     return headers;
 }
@@ -20,6 +19,7 @@ function login(username, password) {
     const options = {
         method: 'POST',
         headers: headers(),
+        credentials: 'same-origin',
         body: JSON.stringify(user)
     };
 
@@ -27,6 +27,7 @@ function login(username, password) {
         fetch(`${apiUrl}/users/login`, options).then(res => {
             if(res.ok) {
                 console.log("Successful. Getting response data:");
+                console.log(res.cookie);
                 res.json().then(function(data) {
                     console.log(data);
                     window.location.href = "/secret";
@@ -36,4 +37,22 @@ function login(username, password) {
             }
         }).catch(e => console.log(e));
     });
+}
+
+function isLoggedIn() {
+    const options = {
+        method: 'GET',
+        headers: headers(),
+        credentials: 'same-origin',
+    }
+
+    return new Promise((resolve) => {
+        fetch(`${apiUrl}/users/isLoggedIn`, options).then(res => {
+            if(res.ok) {
+                console.log("Logged In");
+            }else {
+                console.log("Not logged in");
+            }
+        }).catch(e => console.log(e));
+    })
 }
