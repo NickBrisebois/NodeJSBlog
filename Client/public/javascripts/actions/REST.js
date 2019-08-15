@@ -19,7 +19,8 @@ function login(username, password) {
     const options = {
         method: 'POST',
         headers: headers(),
-        credentials: 'same-origin',
+        mode: 'cors',
+        credentials: 'include',
         body: JSON.stringify(user)
     };
 
@@ -27,11 +28,10 @@ function login(username, password) {
         fetch(`${apiUrl}/users/login`, options).then(res => {
             if(res.ok) {
                 console.log("Successful. Getting response data:");
-                console.log(res.cookie);
-                res.json().then(function(data) {
+                /*res.json().then(function(data) {
                     console.log(data);
                     window.location.href = "/secret";
-                })
+                })*/
             }else {
                 console.log("Failed");
             }

@@ -58,8 +58,13 @@ router.post('/login', auth.optional, (req, res, next) => {
         if(passportUser) {
             const user = passportUser;
             user.token = passportUser.generateJWT();
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+            res.set('Access-Control-Allow-Headers', 'content-type, allow');
+            res.set('Access-Control-Allow-Credentials', 'true');
             res.cookie('auth-token', user, {httpOnly: false, maxAge: 90000});
-            return res.json({user: user.toAuthJSON()});
+            res.cookie('tesasdfasdf', 'tesadsfasdf', {httpOnly: false, maxAge: 90000});
+            next();
+            //return res.json({user: user.toAuthJSON()});
         }
         return res.status(400);
     })(req, res, next);

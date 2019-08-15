@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
@@ -20,7 +21,7 @@ app.use(cookieParser());
 app.use(cors({
     credentials: true,
     methods: ['GET', 'POST'],
-    allowedHeaders: ["*"],
+    allowedHeaders: ["content-type", "allow"],
     origin: ['http://localhost:3000'],
 }));
 app.use(morgan('dev'));
