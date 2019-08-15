@@ -27,11 +27,9 @@ function login(username, password) {
 	return new Promise((resolve) => {
 		fetch(`${apiUrl}/users/login`, options).then(res => {
 			if(res.ok) {
-				console.log("Successful login");
-				window.location.href = "/secret";
-			}else {
-				console.log("Failed");
+				resolve(true);
 			}
+			resolve(false);
 		}).catch(e => console.log(e));
 	});
 }

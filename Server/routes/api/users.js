@@ -73,6 +73,7 @@ router.post('/login', auth.optional, (req, res, next) => {
  * Check log in state of user
  */
 router.post('/isLoggedIn', (req, res, next) => {
+	console.log(req.body['auth-token']);
 	if(req.body['auth-token'] != undefined) {
 		let user = jwt.decode(req.body['auth-token']);
 		console.log(user);
@@ -84,7 +85,7 @@ router.post('/isLoggedIn', (req, res, next) => {
 			}
 		});
 	}else {
-		return res.sendStatus(401);
+		return res.json({'validLogin': false});
 	}
 })
 

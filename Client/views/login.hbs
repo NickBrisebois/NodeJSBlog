@@ -12,7 +12,16 @@
         e.preventDefault();
         let username = document.getElementById("username_box").value;
         let password = document.getElementById("password_box").value;
-        login(username, password);
+
+        login(username, password).then((data) => {
+            if(data) {
+                window.location.href = "/controlpanel";
+                return false;
+            }
+
+            console.log("failed login");
+        });
+
         return false;
     });
 </script>

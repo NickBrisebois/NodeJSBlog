@@ -4,16 +4,11 @@ const router = express.Router();
 
 const apiUrl = "http://localhost:8000/api";
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-	res.render('secret', { loggedIn: isLoggedIn(req.cookies['auth-token']) });
-});
-
 /**
  * REST call to server to check if client is logged in 
  * @param {string} token 
  */
-function isLoggedIn(token) {
+module.exports.isLoggedIn = function (token) {
 	console.log(token);
 	const options = {
 		method: 'POST',
@@ -30,12 +25,9 @@ function isLoggedIn(token) {
 			if(res.ok) {
 				res.json().then((data) => {
 					console.log('Logged in: ' + data['validLogin']);
-					return data['validLogin'];
+					resolve(data['validLogin']);
 				});
-			}else {
 			}
 		}).catch(e => console.log(e));
 	})
 }
-
-module.exports = router;
